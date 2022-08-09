@@ -1,0 +1,51 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: icppp
+  labels:
+    app: icppp
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - image: wuhan005/icppp:latest
+          name: icppp
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 256m
+              memory: 512Mi
+            requests:
+              cpu: 32m
+              memory: 64Mi
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 9315
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 9315
+              scheme: HTTP
+            periodSeconds: 5
+          ports:
+            - name: http
+              containerPort: 9315
+          volumeMounts:
+            - name: timezone
+              mountPath: /etc/localtime
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%

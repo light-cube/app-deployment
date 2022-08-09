@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+spec:
+  type: ClusterIP
+  ports:
+    - name: web
+      port: 9315
+      targetPort: 9315
