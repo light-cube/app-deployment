@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: icppp
+  annotations:
+    alb.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: alb
   rules:
