@@ -14,3 +14,7 @@ spec:
                   number: 9315
             path: /
             pathType: Prefix
+  tls:
+    - hosts:
+        - icppp.app.n3ko.co
+      secretName: cert-app
