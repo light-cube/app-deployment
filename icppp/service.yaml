@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: icppp
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: web
       port: 9315
