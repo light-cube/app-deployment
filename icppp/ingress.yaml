@@ -17,4 +17,4 @@ spec:
   tls:
     - hosts:
         - icppp.app.n3ko.co
-      secretName: cert-app
+      secretName: app/cert-app
