@@ -17,4 +17,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-      - icppp.app.n3ko.co
+        - icppp.app.n3ko.co
+      secretName: icppp-cert
