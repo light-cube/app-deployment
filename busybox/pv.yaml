@@ -7,6 +7,15 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteMany
+  csi:
+    driver: nasplugin.csi.alibabacloud.com
+    fsType: nfs
+    volumeAttributes:
+      mountProtocol: nfs
+      path: /
+      server: 0c62c4ab4c-glt79.cn-hangzhou.nas.aliyuncs.com
+      storage.kubernetes.io/csiProvisionerIdentity: 1660148997293-8081-nasplugin.csi.alibabacloud.com
+      volumeAs: subpath
   claimRef:
     kind: PersistentVolumeClaim
     namespace: app
