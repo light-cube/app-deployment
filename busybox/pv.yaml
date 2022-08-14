@@ -9,6 +9,7 @@ spec:
     - ReadWriteMany
   csi:
     driver: nasplugin.csi.alibabacloud.com
+    volumeHandle: nas-root
     fsType: nfs
     volumeAttributes:
       mountProtocol: nfs
