@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: busybox
+  labels:
+    app: busybox
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - image: busybox:latest
+          name: busybox
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: timezone
+              mountPath: /etc/localtime
+            - name: root
+              mountPath: /home/fs
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: root
+          hostPath:
+            path: /
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%

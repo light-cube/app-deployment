@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nas-root
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  claimRef:
+    kind: PersistentVolumeClaim
+    namespace: app
+    name: root
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: lightcube-root
+  mountOptions:
+    - nolock,tcp,noresvport
+    - vers=3
+  volumeMode: Filesystem
