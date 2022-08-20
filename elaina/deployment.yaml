@@ -1,0 +1,63 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: elaina
+  labels:
+    app: elaina
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - image: wuhan005/elaina:latest
+          name: elaina
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 256m
+              memory: 512Mi
+            requests:
+              cpu: 32m
+              memory: 64Mi
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 5
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: timezone
+              mountPath: /etc/localtime
+          envFrom:
+            - secretRef:
+              name: elaina-env-secrets
+          env:
+            - name: KUBERNETES_SERVICE_HOST
+              value: "kubenertes.cluster.local"
+            - name: KUBERNETES_NAMESPACE
+              value: "elaina-sandbox"
+            - name: ELAINA_KUBERNETES_MODE
+              value: "on"
+      terminationGracePeriodSeconds: 60
+      serviceAccountName: elaina-service-account
+      automountServiceAccountToken: true
+      volumes:
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
