@@ -45,7 +45,7 @@ spec:
                 name: elaina-env-secrets
           env:
             - name: KUBERNETES_SERVICE_HOST
-              value: "kubenertes.cluster.local"
+              value: "kubernetes.default.svc:443"
             - name: KUBERNETES_NAMESPACE
               value: "elaina-sandbox"
             - name: ELAINA_KUBERNETES_MODE
