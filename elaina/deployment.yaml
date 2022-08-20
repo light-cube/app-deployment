@@ -42,7 +42,7 @@ spec:
               mountPath: /etc/localtime
           envFrom:
             - secretRef:
-              name: elaina-env-secrets
+                name: elaina-env-secrets
           env:
             - name: KUBERNETES_SERVICE_HOST
               value: "kubenertes.cluster.local"
