@@ -1,0 +1,86 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: asoulvideo
+  labels:
+    app: asoulvideo
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - image: registry.cn-hangzhou.aliyuncs.com/eggplant/asoul-video:latest
+          name: asoulvideo
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 256m
+              memory: 512Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            periodSeconds: 5
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: FLAMEGO_ENV
+              value: "production"
+            - name: FLAMEGO_ADDR
+              value: "0.0.0.0:80"
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  name: asoulvideo-env
+                  key: PGHOST
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: asoulvideo-env
+                  key: PGUSER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: asoulvideo-env
+                  key: PGPASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: asoulvideo-env
+                  key: PGDATABASE
+            - name: PGSSLMODE
+              valueFrom:
+                secretKeyRef:
+                  name: asoulvideo-env
+                  key: PGSSLMODE
+            - name: SOURCE_REPORT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: asoulvideo-env
+                  key: SOURCE_REPORT_KEY
+          volumeMounts:
+            - name: timezone
+              mountPath: /etc/localtime
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
