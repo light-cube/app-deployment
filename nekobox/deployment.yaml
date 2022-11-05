@@ -1,0 +1,63 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nekobox
+  labels:
+    app: nekobox
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - image: registry.cn-hangzhou.aliyuncs.com/n3ko/nekobox:latest
+          name: nekobox
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 256m
+              memory: 512Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            periodSeconds: 5
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: FLAMEGO_ENV
+              value: "production"
+            - name: FLAMEGO_ADDR
+              value: "0.0.0.0:80"
+            - name: NEKOBOX_CONFIG_PATH
+              value: /home/nekobox/conf/app.ini
+          volumeMounts:
+            - name: timezone
+              mountPath: /etc/localtime
+            - name: root
+              mountPath: /home/nekobox/
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: nekobox
+          hostPath:
+            path: /nekobox
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%

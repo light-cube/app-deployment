@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nas-nekobox
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  csi:
+    driver: nasplugin.csi.alibabacloud.com
+    volumeHandle: nas-nekobox
+    fsType: nfs
+    volumeAttributes:
+      mountProtocol: nfs
+      path: /nekobox
+      server: 0c62c4ab4c-glt79.cn-hangzhou.nas.aliyuncs.com
+      volumeAs: subpath
+  claimRef:
+    kind: PersistentVolumeClaim
+    namespace: app
+    name: nas-nekobox
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: lightcube-nekobox
+  mountOptions:
+    - nolock,tcp,noresvport
+    - vers=3
+  volumeMode: Filesystem
