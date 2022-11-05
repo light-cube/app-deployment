@@ -18,7 +18,18 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
+    - host: box.n3ko.co
+      http:
+        paths:
+          - backend:
+              service:
+                name: nekobox
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - nekobox.app.n3ko.co
+        - box.n3ko.co
       secretName: nekobox-cert
