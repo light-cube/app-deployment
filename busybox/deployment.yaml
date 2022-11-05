@@ -9,7 +9,7 @@ spec:
   template:
     spec:
       containers:
-        - image: busybox:latest
+        - image: alpine:latest
           name: busybox
           imagePullPolicy: IfNotPresent
           volumeMounts:
