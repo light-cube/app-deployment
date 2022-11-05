@@ -17,6 +17,11 @@ spec:
               mountPath: /etc/localtime
             - name: root
               mountPath: /home/fs
+      tolerations:
+        - key: "app"
+          value: "nekobox"
+          operator: "Equal"
+          effect: "NoSchedule"
       terminationGracePeriodSeconds: 60
       volumes:
         - name: root
