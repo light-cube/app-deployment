@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  volumeName: nas-e79173fc-87a5-417b-aa6f-1594b137a446
+  volumeName: nas-nekobox
   storageClassName: lightcube-nekobox
   volumeMode: Filesystem
