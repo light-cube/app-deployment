@@ -5,7 +5,7 @@ metadata:
   labels:
     app: busybox
 spec:
-  replicas: 0
+  replicas: 1
   template:
     spec:
       containers:
