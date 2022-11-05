@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nekobox
 spec:
-  replicas: 0
+  replicas: 1
   template:
     spec:
       containers:
@@ -52,8 +52,8 @@ spec:
       terminationGracePeriodSeconds: 60
       volumes:
         - name: nekobox
-          hostPath:
-            path: /nekobox
+          persistentVolumeClaim:
+            claimName: nas-nekobox
         - name: timezone
           hostPath: 
             path: /usr/share/zoneinfo/Asia/Shanghai
