@@ -47,7 +47,7 @@ spec:
           volumeMounts:
             - name: timezone
               mountPath: /etc/localtime
-            - name: root
+            - name: nekobox
               mountPath: /home/nekobox/
       terminationGracePeriodSeconds: 60
       volumes:
