@@ -19,7 +19,7 @@ spec:
   claimRef:
     kind: PersistentVolumeClaim
     namespace: app
-    name: root
+    name: nas-root
   persistentVolumeReclaimPolicy: Delete
   storageClassName: lightcube-root
   mountOptions:
