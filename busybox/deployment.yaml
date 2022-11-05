@@ -17,6 +17,8 @@ spec:
               mountPath: /etc/localtime
             - name: root
               mountPath: /home/fs
+          command: ["sleep"]
+          args: ["infinity"]
       tolerations:
         - key: "app"
           value: "nekobox"
