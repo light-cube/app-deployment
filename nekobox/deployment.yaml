@@ -19,13 +19,6 @@ spec:
             requests:
               cpu: 10m
               memory: 64Mi
-          tolerations:
-            - key: "app"
-              value: "nekobox"
-              operator: "Equal"
-              effect: "NoSchedule"
-          nodeSelector:
-            app: nekobox
           livenessProbe:
             failureThreshold: 2
             httpGet:
@@ -56,6 +49,13 @@ spec:
               mountPath: /etc/localtime
             - name: nekobox
               mountPath: /home/nekobox/
+      tolerations:
+        - key: "app"
+          value: "nekobox"
+          operator: "Equal"
+          effect: "NoSchedule"
+      nodeSelector:
+        app: nekobox
       terminationGracePeriodSeconds: 60
       volumes:
         - name: nekobox
