@@ -9,7 +9,7 @@ spec:
   template:
     spec:
       containers:
-        - image: registry.cn-hangzhou.aliyuncs.com/n3ko/nekobox:latest
+        - image: nekobox
           name: nekobox
           imagePullPolicy: Always
           resources:
