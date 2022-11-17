@@ -15,4 +15,4 @@ generatorOptions:
   disableNameSuffixHash: true
 images:
 - name: nekobox
-  newName: registry.cn-hangzhou.aliyuncs.com/registry.cn-hangzhou.aliyuncs.com/n3ko/nekobox
+  newName: registry.cn-hangzhou.aliyuncs.com/n3ko/nekobox
