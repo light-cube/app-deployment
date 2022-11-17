@@ -5,11 +5,14 @@ commonLabels:
   app: nekobox
 
 resources:
-  - deployment.yaml
-  - service.yaml
-  - ingress.yaml
-  - pvc.yaml
-  - pv.yaml
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+- pvc.yaml
+- pv.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
+images:
+- name: nekobox
+  newName: registry.cn-hangzhou.aliyuncs.com/registry.cn-hangzhou.aliyuncs.com/n3ko/nekobox
