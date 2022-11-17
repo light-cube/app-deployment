@@ -16,4 +16,4 @@ generatorOptions:
 images:
 - name: nekobox
   newName: registry.cn-hangzhou.aliyuncs.com/n3ko/nekobox
-  newTag: 20221117-062735
+  newTag: 20221117-071544
