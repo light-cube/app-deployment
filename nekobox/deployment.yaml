@@ -11,7 +11,7 @@ spec:
       containers:
         - image: nekobox
           name: nekobox
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               cpu: 512m
