@@ -49,13 +49,6 @@ spec:
               mountPath: /etc/localtime
             - name: nekobox
               mountPath: /home/nekobox/
-      tolerations:
-        - key: "app"
-          value: "nekobox"
-          operator: "Equal"
-          effect: "NoSchedule"
-      nodeSelector:
-        app: nekobox
       terminationGracePeriodSeconds: 60
       volumes:
         - name: nekobox
