@@ -5,6 +5,6 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name: web
+    - name: http-web
       port: 9315
       targetPort: 9315
