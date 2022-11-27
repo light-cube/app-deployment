@@ -7,8 +7,9 @@ metadata:
 spec:
   replicas: 1
   template:
-    labels:
-      sidecar.istio.io/inject: "true"
+    metadata:
+      labels:
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - image: wuhan005/icppp:latest
