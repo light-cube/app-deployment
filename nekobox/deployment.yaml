@@ -8,7 +8,6 @@ spec:
   replicas: 2
   template:
     spec:
-      hostNetwork: true
       containers:
         - image: nekobox
           name: nekobox
