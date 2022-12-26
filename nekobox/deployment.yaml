@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nekobox
 spec:
-  replicas: 2
+  replicas: 0
   template:
     spec:
       containers:
